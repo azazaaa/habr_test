@@ -6,7 +6,7 @@ from time import sleep
 import re
 import sys
 import os
-value = os.environ.get("secrets.MAIL")
+value = os.environ.get("MAIL")
 print(value)
 
 # LOGIN = sys.argv[1]
