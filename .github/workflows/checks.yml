@@ -1,0 +1,29 @@
+name: deadline
+
+on: workflow_dispatch
+#  schedule:
+#    - cron: '0 7 * * *'
+
+jobs:
+  run_script:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+    name: run script
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: checkout_repo
+        uses: actions/checkout@v3
+      - name: cache
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+          cache: 'pip'
+      - name: install deps
+        run: |
+          pip install -r requirements.txt
+      - name: Run script main
+        run: python main.py ${{ secrets.LOGIN }} ${{ secrets.PASSWORD }} ${{  secrets.TOKEN }}
+
+
