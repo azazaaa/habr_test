@@ -7,7 +7,8 @@ import re
 import sys
 import os
 value = os.environ.get("MAIL")
-print(value)
+test = os.environ.get("TEST")
+print(value,test)
 
 # LOGIN = sys.argv[1]
 # PASSWORD = sys.argv[2]
