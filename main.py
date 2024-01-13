@@ -21,8 +21,8 @@ CHAT_ID = 836801516
 #
 options = Options()
 options.add_argument("-headless")
-# driver = webdriver.Firefox(options=options)
-driver = webdriver.Firefox()
+driver = webdriver.Firefox(options=options)
+#driver = webdriver.Firefox()
 driver.maximize_window()
 driver.implicitly_wait(10)
 
