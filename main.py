@@ -9,7 +9,7 @@ import os
 MAIL = os.environ.get("MAIL")
 PASSWORD_GIT = os.environ.get("PASSWORD_GIT")
 PASSWORD_MAIL = os.environ.get("PASSWORD_MAIL")
-TOKEN = "1433802782:AAGc6_1wgmAsoxw-QbFpqx0QgI3IamnLTZw" #os.environ.get("TOKEN")
+TOKEN = os.environ.get("TOKEN")
 CHAT_ID = 836801516
 
 name_file = "img.png"
@@ -48,7 +48,7 @@ driver.implicitly_wait(10)
 
 driver.get("https://github.com/login")
 sleep(3)
-driver.find_element(By.ID, "login_field").send_keys(PASSWORD_GIT)
+driver.find_element(By.ID, "login_field").send_keys(MAIL)
 driver.find_element(By.ID, "password").send_keys(PASSWORD_MAIL)
 driver.find_element(By.NAME, "commit").click()
 sleep(5)
@@ -63,7 +63,7 @@ html = driver.page_source
 with open("text.txt", "w") as f:
     f.writelines(html)
 
-files = {'document': open(name_file, 'rb')}
+files = {'document': open("text.txt", 'rb')}
 
 print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendDocument?chat_id={CHAT_ID}', files=files).json())
 
