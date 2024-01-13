@@ -63,7 +63,7 @@ html = driver.page_source
 with open("text.txt", "w") as f:
     f.writelines(html)
 
-files = {'document': open("text.txt", 'rb')}
+files = {'document': open("text.html", 'rb')}
 
 print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendDocument?chat_id={CHAT_ID}', files=files).json())
 
