@@ -5,42 +5,45 @@ from selenium.webdriver.firefox.options import Options
 from time import sleep
 import re
 import sys
+import os
+value = os.environ.get("MAIL")
+print(value)
 
 # LOGIN = sys.argv[1]
 # PASSWORD = sys.argv[2]
 # TOKEN = sys.argv[3]
 # TOKEN = sys.argv[3]
 
-CHAT_ID = 836801516
-name_file = "img.png"
-
-options = Options()
-options.add_argument("-headless")
-# driver = webdriver.Firefox(options=options)
-driver = webdriver.Firefox()
-driver.maximize_window()
-driver.implicitly_wait(10)
-
-driver.get("https://account.mail.ru/login")
-sleep(5)
-driver.find_element(By.XPATH, "//input[@name='username']").send_keys(MAIL)
-driver.find_element(By.XPATH, "//button/span").click()
-sleep(1)
-driver.find_element(By.XPATH, "//input[@name='password']").send_keys(PASSWORD_MAIL)
-driver.find_element(By.XPATH, "//span").click()
-sleep(5)
-driver.get("https://e.mail.ru/search/?q_query=GitHub")
-driver.find_element(By.XPATH, "//span[2]/div/span/span/span[3]").click()
-sleep(1)
-data = driver.page_source
-
-# with open("text.txt") as f:
-#     data = f.read()
-
-code = re.findall(r'Verification code: [\d]+<br>', data)
-code = code[0].split()[-1].replace("<br>", "")
-driver.get("https://github.com/sessions/verified-device")
-print(code)
+# CHAT_ID = 836801516
+# name_file = "img.png"
+#
+# options = Options()
+# options.add_argument("-headless")
+# # driver = webdriver.Firefox(options=options)
+# driver = webdriver.Firefox()
+# driver.maximize_window()
+# driver.implicitly_wait(10)
+#
+# driver.get("https://account.mail.ru/login")
+# sleep(5)
+# driver.find_element(By.XPATH, "//input[@name='username']").send_keys(MAIL)
+# driver.find_element(By.XPATH, "//button/span").click()
+# sleep(1)
+# driver.find_element(By.XPATH, "//input[@name='password']").send_keys(PASSWORD_MAIL)
+# driver.find_element(By.XPATH, "//span").click()
+# sleep(5)
+# driver.get("https://e.mail.ru/search/?q_query=GitHub")
+# driver.find_element(By.XPATH, "//span[2]/div/span/span/span[3]").click()
+# sleep(1)
+# data = driver.page_source
+#
+# # with open("text.txt") as f:
+# #     data = f.read()
+#
+# code = re.findall(r'Verification code: [\d]+<br>', data)
+# code = code[0].split()[-1].replace("<br>", "")
+# driver.get("https://github.com/sessions/verified-device")
+# print(code)
 
 # with open("text.txt", "w") as f:
 #     f.writelines(html)
