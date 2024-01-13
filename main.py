@@ -43,12 +43,14 @@ if "verified-device" in driver.current_url:
     driver.find_element(By.XPATH, "//span").click()
     sleep(5)
     driver.get("https://e.mail.ru/search/?q_query=GitHub")
+    sleep(3)
     driver.find_element(By.XPATH, "//span[2]/div/span/span/span[3]").click()
     sleep(1)
     data = driver.page_source
     code = re.findall(r'Verification code: [\d]+<br>', data)
     code = code[0].split()[-1].replace("<br>", "")
     driver.get("https://github.com/sessions/verified-device")
+    sleep(3)
     driver.find_element(By.NAME, "otp").send_keys(code)
     driver.save_screenshot(name_file)
     files = {'photo': open(name_file, 'rb')}
