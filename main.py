@@ -54,6 +54,14 @@ if "verified-device" in driver.current_url:
     driver.save_screenshot(name_file)
     files = {'photo': open(name_file, 'rb')}
     print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
+    html = driver.page_source
+
+    with open("text.html", "w") as f:
+        f.writelines(html)
+
+    files = {'document': open("text.html", 'rb')}
+
+    print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendDocument?chat_id={CHAT_ID}', files=files).json())
     driver.get("https://e.mail.ru/search/?q_query=GitHub")
     sleep(5)
     driver.find_element(By.XPATH, "//span[2]/div/span/span/span[3]").click()
