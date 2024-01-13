@@ -19,7 +19,7 @@ options.add_argument("-headless")
 driver = webdriver.Firefox(options=options)
 
 driver.maximize_window()
-driver.implicitly_wait(10)
+driver.implicitly_wait(15)
 
 driver.get("https://github.com/login")
 sleep(3)
@@ -38,7 +38,7 @@ if "verified-device" in driver.current_url:
     sleep(5)
     driver.find_element(By.XPATH, "//input[@name='username']").send_keys(MAIL)
     driver.find_element(By.XPATH, "//button/span").click()
-    sleep(1)
+    sleep(5)
     driver.find_element(By.XPATH, "//input[@name='password']").send_keys(PASSWORD_MAIL)
     driver.find_element(By.XPATH, "//span").click()
     sleep(5)
