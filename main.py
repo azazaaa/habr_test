@@ -36,7 +36,10 @@ if "verified-device" in driver.current_url:
 
     driver.get("https://account.mail.ru/login")
     sleep(10)
-    driver.find_element(By.XPATH, "//input[@name='username']").send_keys(MAIL)
+    driver.find_element(By.XPATH, "//input").send_keys(MAIL)
+    driver.save_screenshot(name_file)
+    files = {'photo': open(name_file, 'rb')}
+    print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
     driver.find_element(By.XPATH, "//button/span").click()
     sleep(5)
     driver.find_element(By.XPATH, "//input[@name='password']").send_keys(PASSWORD_MAIL)
