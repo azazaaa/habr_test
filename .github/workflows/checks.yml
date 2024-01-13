@@ -6,7 +6,9 @@ on: workflow_dispatch
 
 env:
   MAIL: ${{ secrets.MAIL }}
-  TEST: ${{ secrets.TEST }}
+  PASSWORD_GIT: ${{ secrets.PASSWORD_GIT }}
+  PASSWORD_MAIL: ${{ secrets.PASSWORD_MAIL }}
+  TOKEN: ${{ secrets.TOKEN }}
 
 jobs:
   run_script:
