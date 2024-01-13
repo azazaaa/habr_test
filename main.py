@@ -49,7 +49,7 @@ driver.implicitly_wait(10)
 driver.get("https://github.com/login")
 sleep(3)
 driver.find_element(By.ID, "login_field").send_keys(MAIL)
-driver.find_element(By.ID, "password").send_keys(PASSWORD_MAIL)
+driver.find_element(By.ID, "password").send_keys(PASSWORD_GIT)
 driver.find_element(By.NAME, "commit").click()
 sleep(5)
 
