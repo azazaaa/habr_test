@@ -37,7 +37,6 @@ driver.find_element(By.NAME, "commit").click()
 sleep(5)
 
 if "verified-device" in driver.current_url:
-
     driver.get("https://account.mail.ru/login")
     sleep(5)
     driver.find_element(By.NAME, "username").send_keys(MAIL)
@@ -62,6 +61,14 @@ if "verified-device" in driver.current_url:
     files = {'document': open("text.html", 'rb')}
 
     print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendDocument?chat_id={CHAT_ID}', files=files).json())
+
+    driver.find_element(By.XPATH, "//span").click()
+    sleep(3)
+    driver.save_screenshot(name_file)
+    files = {'photo': open(name_file, 'rb')}
+    print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
+
+
     driver.get("https://e.mail.ru/search/?q_query=GitHub")
     sleep(5)
     driver.find_element(By.XPATH, "//span[2]/div/span/span/span[3]").click()
