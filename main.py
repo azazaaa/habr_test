@@ -10,20 +10,30 @@ value = os.environ.get("MAIL")
 test = os.environ.get("TEST")
 print(value,test)
 
+
 # LOGIN = sys.argv[1]
 # PASSWORD = sys.argv[2]
-# TOKEN = sys.argv[3]
+TOKEN = sys.argv[1]
 # TOKEN = sys.argv[3]
 
 # CHAT_ID = 836801516
 # name_file = "img.png"
 #
-# options = Options()
-# options.add_argument("-headless")
-# # driver = webdriver.Firefox(options=options)
-# driver = webdriver.Firefox()
-# driver.maximize_window()
-# driver.implicitly_wait(10)
+options = Options()
+options.add_argument("-headless")
+# driver = webdriver.Firefox(options=options)
+driver = webdriver.Firefox()
+driver.maximize_window()
+driver.implicitly_wait(10)
+
+driver.get("https://account.mail.ru/login")
+sleep(5)
+driver.find_element(By.XPATH, "//input[@name='username']").send_keys(value)
+
+driver.save_screenshot("name_file")
+files = {'photo': open("name_file", 'rb')}
+print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
+
 #
 # driver.get("https://account.mail.ru/login")
 # sleep(5)
