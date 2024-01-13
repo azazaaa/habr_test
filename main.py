@@ -16,7 +16,7 @@ print(value,test)
 TOKEN = sys.argv[1]
 # TOKEN = sys.argv[3]
 
-# CHAT_ID = 836801516
+CHAT_ID = 836801516
 # name_file = "img.png"
 #
 options = Options()
