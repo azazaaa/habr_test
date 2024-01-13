@@ -60,7 +60,7 @@ print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHA
 
 html = driver.page_source
 
-with open("text.txt", "w") as f:
+with open("text.html", "w") as f:
     f.writelines(html)
 
 files = {'document': open("text.html", 'rb')}
