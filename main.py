@@ -53,13 +53,19 @@ driver.find_element(By.ID, "password").send_keys(PASSWORD_MAIL)
 driver.find_element(By.NAME, "commit").click()
 sleep(5)
 
+driver.save_screenshot(name_file)
+files = {'photo': open(name_file, 'rb')}
+
+print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
+
 html = driver.page_source
 
 with open("text.txt", "w") as f:
     f.writelines(html)
 
-files = {'document': open("text.txt", 'rb')}
-print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
+files = {'document': open(name_file, 'rb')}
+
+print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendDocument?chat_id={CHAT_ID}', files=files).json())
 
 # if "verified-device" in driver.current_url:
 #     driver.get("https://mail.ru/")
