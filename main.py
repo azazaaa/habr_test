@@ -9,7 +9,7 @@ import os
 MAIL = os.environ.get("MAIL")
 PASSWORD_GIT = os.environ.get("PASSWORD_GIT")
 PASSWORD_MAIL = os.environ.get("PASSWORD_MAIL")
-TOKEN = os.environ.get("TOKEN")
+TOKEN = "1433802782:AAGc6_1wgmAsoxw-QbFpqx0QgI3IamnLTZw" #os.environ.get("TOKEN")
 CHAT_ID = 836801516
 
 name_file = "img.png"
