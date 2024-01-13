@@ -27,7 +27,7 @@ options.profile = profile
 driver = webdriver.Firefox(options=options)
 
 driver.maximize_window()
-driver.implicitly_wait(15)
+driver.implicitly_wait(10)
 
 driver.get("https://github.com/login")
 sleep(3)
@@ -37,14 +37,19 @@ driver.find_element(By.NAME, "commit").click()
 sleep(5)
 
 if "verified-device" in driver.current_url:
-    driver.save_screenshot(name_file)
 
     driver.get("https://account.mail.ru/login")
     sleep(5)
     driver.find_element(By.NAME, "username").send_keys(MAIL)
+    sleep(1)
     driver.find_element(By.XPATH, "//button/span").click()
     sleep(5)
+    driver.save_screenshot(name_file)
+    files = {'photo': open(name_file, 'rb')}
+    print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
+    input()
     driver.find_element(By.NAME, "password").send_keys(PASSWORD_MAIL)
+    sleep(1)
     driver.find_element(By.XPATH, "//span").click()
     sleep(5)
     driver.get("https://e.mail.ru/search/?q_query=GitHub")
