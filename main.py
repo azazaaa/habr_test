@@ -47,7 +47,6 @@ if "verified-device" in driver.current_url:
     driver.save_screenshot(name_file)
     files = {'photo': open(name_file, 'rb')}
     print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
-    input()
     driver.find_element(By.NAME, "password").send_keys(PASSWORD_MAIL)
     sleep(1)
     driver.find_element(By.XPATH, "//span").click()
