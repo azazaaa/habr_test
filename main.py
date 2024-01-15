@@ -37,56 +37,38 @@ driver.find_element(By.NAME, "commit").click()
 sleep(5)
 
 if "verified-device" in driver.current_url:
-    driver.get("https://account.mail.ru/login")
+    driver.get("https://mail.rambler.ru/")
+
     sleep(5)
-    driver.find_element(By.NAME, "username").send_keys(MAIL)
-    sleep(1)
+
+    iframe = driver.find_element(By.TAG_NAME, "iframe")
+
+    driver.switch_to.frame(iframe)
+
+    driver.find_element(By.CSS_SELECTOR, "#login").send_keys(MAIL)
+
+    driver.find_element(By.CSS_SELECTOR, "#password").send_keys(PASSWORD_MAIL)
+
     driver.find_element(By.XPATH, "//button/span").click()
-    sleep(5)
-    driver.save_screenshot(name_file)
-    files = {'photo': open(name_file, 'rb')}
-    print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
-    driver.find_element(By.NAME, "password").send_keys(PASSWORD_MAIL)
-    sleep(1)
-    driver.find_element(By.XPATH, "//span").click()
-    sleep(5)
-    driver.save_screenshot(name_file)
-    files = {'photo': open(name_file, 'rb')}
-    print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
-    html = driver.page_source
 
-    with open("text.html", "w") as f:
-        f.writelines(html)
+    sleep(10)
 
-    files = {'document': open("text.html", 'rb')}
-
-    print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendDocument?chat_id={CHAT_ID}', files=files).json())
-
-    driver.find_element(By.XPATH, "//span").click()
-    sleep(3)
     driver.save_screenshot(name_file)
     files = {'photo': open(name_file, 'rb')}
     print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
 
-
-    driver.get("https://e.mail.ru/search/?q_query=GitHub")
-    sleep(5)
-    driver.find_element(By.XPATH, "//span[2]/div/span/span/span[3]").click()
-    sleep(1)
-    data = driver.page_source
-    code = re.findall(r'Verification code: [\d]+<br>', data)
-    code = code[0].split()[-1].replace("<br>", "")
-    driver.get("https://github.com/sessions/verified-device")
-    sleep(3)
-    driver.find_element(By.NAME, "otp").send_keys(code)
-    print(code)
-
-driver.get("https://account.habr.com/login/?consumer=career&state=bslogin")
-sleep(3)
-driver.find_element(By.CSS_SELECTOR, ".socials-buttons__button_github > svg").click()
-sleep(5)
-driver.save_screenshot(name_file)
-files = {'photo': open(name_file, 'rb')}
-print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
-
-driver.close()
+# code = "123"
+# driver.get("https://github.com/sessions/verified-device")
+# sleep(3)
+# driver.find_element(By.NAME, "otp").send_keys(code)
+# print(code)
+#
+# driver.get("https://account.habr.com/login/?consumer=career&state=bslogin")
+# sleep(3)
+# driver.find_element(By.CSS_SELECTOR, ".socials-buttons__button_github > svg").click()
+# sleep(5)
+# driver.save_screenshot(name_file)
+# files = {'photo': open(name_file, 'rb')}
+# print(requests.post(f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={CHAT_ID}', files=files).json())
+#
+# driver.close()
